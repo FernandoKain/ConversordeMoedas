@@ -1,6 +1,8 @@
 package com.example.conversordemoedas.data.di
 
 import android.util.Log
+import com.example.conversordemoedas.data.repository.CoinRepository
+import com.example.conversordemoedas.data.repository.CoinRepositoryImpl
 import com.example.conversordemoedas.data.services.AwesomeService
 import com.google.gson.GsonBuilder
 import okhttp3.OkHttpClient
@@ -17,8 +19,10 @@ object DataModules {
     private const val HTTP_TAG = "Okhttp"
 
     fun load(){
-        loadKoinModules(networkModule())
+        loadKoinModules(networkModule()+ repositoryModule())
     }
+
+
     private fun networkModule():Module{
         return module {
             single {
@@ -41,6 +45,13 @@ object DataModules {
             }
         }
     }
+
+    private fun repositoryModule(): Module {
+        return module {
+            single<CoinRepository>{CoinRepositoryImpl(get())}
+        }
+    }
+
     private inline fun <reified T> createService(client: OkHttpClient, factory: GsonConverterFactory): T{
         return Retrofit.Builder()
             .baseUrl("https://economia.awesomeapi.com.br")
