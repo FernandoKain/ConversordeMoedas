@@ -7,12 +7,13 @@ import androidx.core.widget.doAfterTextChanged
 import com.example.conversordemoedas.R
 import com.example.conversordemoedas.data.model.Coin
 import com.example.conversordemoedas.databinding.ActivityMainBinding
+import com.example.conversordemoedas.presentation.MainViewModel
 import org.koin.android.ext.android.bind
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
-
+    private val viewModel by viewModel<MainViewModel>()
     private val binding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
 
