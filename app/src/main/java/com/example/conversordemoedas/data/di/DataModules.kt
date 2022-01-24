@@ -13,6 +13,8 @@ import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.HTTP
+import com.example.conversordemoedas.data.database.AppDatabase
+
 
 object DataModules {
 
@@ -48,7 +50,7 @@ object DataModules {
 
     private fun repositoryModule(): Module {
         return module {
-            single<CoinRepository>{CoinRepositoryImpl(get())}
+            single<CoinRepository>{CoinRepositoryImpl(get(), get())}
         }
     }
 
